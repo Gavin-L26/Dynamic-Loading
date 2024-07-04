@@ -2,43 +2,38 @@
 #include <string>
 #include <memory>
 #include "DLLoader.h"
-#include "IPlanet.h"
+#include "BoardImageStream.h"
 
 using namespace std;
 
 #ifdef WIN32
-static const std::string bespinLibPath = "Bespin.dll";
-static const std::string tatooineLibPath = "Tatooine.dll";
+static const std::string e2vLibPath = "libe2v.dll";
+static const std::string shibuyaLibPath = "libshibuya.dll";
 #endif
 #ifdef __linux__
-static const std::string bespinLibPath = "./libBespin.so";
-static const std::string tatooineLibPath = "./libTatooine.so";
+static const std::string e2vLibPath = "./libe2v.so";
+static const std::string shibuyaLibPath = "./libshibuya.so";
 #endif
-#ifdef __APPLE__
-static const std::string bespinLibPath = "./libBespin.dylib";
-static const std::string tatooineLibPath = "./libTatooine.dylib";
-#endif
-
 /*
 ** Using the smart pointer directly in an inner function because
 ** the reference to its destructor contained in the dll is lost before
 ** going out of the caller function's scope.
 */
-void greetFromAPlanet(dlloader::DLLoader<IPlanet>& dlloader)
+void testABoard(dlloader::DLLoader<BoardImageStream>& dlloader)
 {
-	std::shared_ptr<IPlanet> planet = dlloader.DLGetInstance();
+	std::shared_ptr<BoardImageStream> board = dlloader.DLGetInstance();
 
-	planet->greet();
+	board->test();
 }
 
-void greet(const std::string& path)
+void test(const std::string& path)
 {
-	dlloader::DLLoader<IPlanet> dlloader(path);
+	dlloader::DLLoader<BoardImageStream> dlloader(path);
 
 	std::cout << "Loading " << path << std::endl;
 	dlloader.DLOpenLib();
 
-	greetFromAPlanet(dlloader);
+	testABoard(dlloader);
 
 	std::cout << "Unloading " << path << std::endl;
 	dlloader.DLCloseLib();
@@ -46,8 +41,8 @@ void greet(const std::string& path)
 
 int main()
 {
-	greet(tatooineLibPath);
-	greet(bespinLibPath);
+	test(e2vLibPath);
+	test(shibuyaLibPath);
 
 	return 0;
 }

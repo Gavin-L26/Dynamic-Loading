@@ -38,14 +38,14 @@ include_directories(
 	API/
 )
 
-add_executable(Greet-Core
+add_executable(Test-Core
 	${DLLOADER_SRC}
 	Core/main.cpp
 )
 
-target_link_libraries(Greet-Core ${CMAKE_DL_LIBS})
+target_link_libraries(Test-Core ${CMAKE_DL_LIBS})
 
-set_property( DIRECTORY PROPERTY VS_STARTUP_PROJECT Greet-Core)
+set_property( DIRECTORY PROPERTY VS_STARTUP_PROJECT Test-Core)
 
-add_subdirectory(Libraries/Tatooine)
-add_subdirectory(Libraries/Bespin)
+add_subdirectory(Libraries/e2v)
+add_subdirectory(Libraries/shibuya)

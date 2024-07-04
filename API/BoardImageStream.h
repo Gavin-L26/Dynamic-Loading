@@ -3,15 +3,15 @@
 /*
 ** This is the base class for all planets (libraries)
 */
-class IPlanet
+class BoardImageStream
 {
 	
 public:
-	virtual ~IPlanet() = default;
+	virtual ~BoardImageStream() = default;
 
 	/*
 	** Pure method which will be overrided.
 	*/
-	virtual void greet() = 0;
+	virtual void test() = 0;
 
 };
