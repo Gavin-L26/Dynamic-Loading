@@ -7,8 +7,8 @@
 using namespace std;
 
 #ifdef WIN32
-static const std::string e2vLibPath = "libe2v.dll";
-static const std::string shibuyaLibPath = "libshibuya.dll";
+static const std::string e2vLibPath = "e2v.dll";
+static const std::string shibuyaLibPath = "shibuya.dll";
 #endif
 #ifdef __linux__
 static const std::string e2vLibPath = "./libe2v.so";
