@@ -1,4 +1,5 @@
 #include <iostream>
+#include <filesystem>
 #include <string>
 #include <memory>
 #include "DLLoader.h"
@@ -28,15 +29,20 @@ void testABoard(dlloader::DLLoader<BoardImageStream>& dlloader)
 
 void test(const std::string& path)
 {
-	dlloader::DLLoader<BoardImageStream> dlloader(path);
+	if(std::filesystem::exists(path)){
 
-	std::cout << "Loading " << path << std::endl;
-	dlloader.DLOpenLib();
+		dlloader::DLLoader<BoardImageStream> dlloader(path);
+		
+		std::cout << "Loading " << path << std::endl;
+		dlloader.DLOpenLib();
 
-	testABoard(dlloader);
+		testABoard(dlloader);
 
-	std::cout << "Unloading " << path << std::endl;
-	dlloader.DLCloseLib();
+		std::cout << "Unloading " << path << std::endl;
+		dlloader.DLCloseLib();
+	}
+	else
+		std::cerr << path << " does not exist" << std::endl;
 }
 
 int main()
